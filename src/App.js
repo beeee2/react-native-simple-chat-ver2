@@ -5,6 +5,8 @@ import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { ThemeProvider } from 'styled-components/native';
 import { theme } from './theme';
+import Navigation from './navigations';
+import {images} from './utils/images';
 
 const cacheImages = images => {
     return images.map(image => {
@@ -24,7 +26,10 @@ const App = () => {
     const [isReady, setIsReady] = useState(false);
 
     const _loadAssets = async () => {
-        const imageAssets = cacheImages([require('../assets/splash.png')]);
+        const imageAssets = cacheImages([
+            require('../assets/splash.png'),
+            ...Object.values(images),
+        ]);
         const fontAssets = cacheFonts([]);
 
         await Promise.all([...imageAssets, ...fontAssets]);
@@ -33,9 +38,14 @@ const App = () => {
     return isReady ? (
         <ThemeProvider theme={theme}>
             <StatusBar barStyle="dark-content" />
+            <Navigation />
         </ThemeProvider>
     ) : (
-        <AppLoading /> 
+        <AppLoading 
+            startAsync={_loadAssets}
+            onFinish={()=> setIsReady(true)}
+            onError={console.warn}
+        /> 
     );
 };
 
