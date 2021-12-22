@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 
@@ -25,23 +25,28 @@ const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
     border-radius: 4px;
 `;
 
-const Input = ({
-    label,
-    value,
-    onChangeText,
-    onSubmitEditing,
-    onBlur,
-    placeholder,
-    isPassword,
-    returnKeyType,
-    maxLength,
-}) => {
+const Input = forwardRef(
+    (
+        {
+            label,
+            value,
+            onChangeText,
+            onSubmitEditing,
+            onBlur,
+            placeholder,
+            isPassword,
+            returnKeyType,
+            maxLength,
+        },
+        ref
+    ) => {
     const [isFocused, setIsFocused] = useState(false);
 
     return (
         <Container>
             <Label isFocused={isFocused}>{label}</Label>
             <StyledTextInput
+                ref={ref}
                 isFocused={isFocused}
                 value = {value}
                 onChangeText={onChangeText}
@@ -61,8 +66,9 @@ const Input = ({
                 underlineColorAndroid="transparent" //Android only
             />
         </Container>
-    );
-};
+        );
+    }
+);
 
 Input.defaultProps = {
     onBlur: ()=> {},

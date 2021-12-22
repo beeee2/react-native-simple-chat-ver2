@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useRef} from 'react';
 import styled from 'styled-components/native';
 import { Image, Input } from '../components';
 import { images } from '../utils/images';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 
 const Container = styled.View`
@@ -15,28 +16,32 @@ const Container = styled.View`
 const Login = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const passwordRef = useRef();
 
     return (
-        <Container>
-            <Image url={images.logo} imageStyle={{borderRadius:8}} />
-            <Input 
-                label="Email"
-                value={email}
-                onChangeText={text => setEmail(text)}
-                onSubmitEditing={() => {}}
-                placeholder = "Email"
-                returnKeyType="next"
-            />
-            <Input
-                label="Password"
-                value={password}
-                onChangeText={text => setPassword(text)}
-                onSubmitEditing={() => {}}
-                placeholder="Password"
-                returnKeyType="done"
-                isPassword
-            />
-        </Container>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <Container>
+                <Image url={images.logo} imageStyle={{borderRadius:8}} />
+                <Input 
+                    label="Email"
+                    value={email}
+                    onChangeText={text => setEmail(text)}
+                    onSubmitEditing={() => passwordRef.current.focus()}
+                    placeholder = "Email"
+                    returnKeyType="next"
+                />
+                <Input
+                    ref={passwordRef}
+                    label="Password"
+                    value={password}
+                    onChangeText={text => setPassword(text)}
+                    onSubmitEditing={() => {}}
+                    placeholder="Password"
+                    returnKeyType="done"
+                    isPassword
+                />
+            </Container>
+        </TouchableWithoutFeedback>
     );
 };
 
