@@ -2,7 +2,7 @@ import React,{useState, useRef} from 'react';
 import styled from 'styled-components/native';
 import { Image, Input } from '../components';
 import { images } from '../utils/images';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const Container = styled.View`
@@ -19,7 +19,10 @@ const Login = ({navigation}) => {
     const passwordRef = useRef();
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAwareScrollView
+            contentContainerStyle={{flex:1}}
+            extraScrollHeight={20}
+        >
             <Container>
                 <Image url={images.logo} imageStyle={{borderRadius:8}} />
                 <Input 
@@ -41,7 +44,7 @@ const Login = ({navigation}) => {
                     isPassword
                 />
             </Container>
-        </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
     );
 };
 
