@@ -65,7 +65,7 @@ const Signup = () => {
 
     const _handleSignupButtonPress = async () => {
         try {
-            const user = await signup({email, password});
+            const user = await signup({email, password, name, photoUrl});
             console.log(user);
             Alert.alert('Signup Success', user.email);
         } catch (e) {
