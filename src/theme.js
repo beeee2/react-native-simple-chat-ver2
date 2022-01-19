@@ -21,7 +21,10 @@ export const theme = {
     buttonBackground : colors.blue,
     buttonTitle : colors.white,
     buttonUnfilledTitle : colors.blue,
+    buttonLogout : colors.red,
     headerTintColor : colors.black,
+    tabActiveColor : colors.blue,
+    tabInactiveColor : colors.grey_1,
     spinnerBackground : colors.black,
     spinnerIndicator : colors.white,
 };
