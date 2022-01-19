@@ -16,7 +16,8 @@ const Label = styled.Text`
 const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
     placeholderTextColor : theme.inputPlaceholder,
 }))`
-    background-color: ${({theme}) => theme.background};
+    background-color: ${({theme, editable}) => 
+        editable ? theme.background : theme.inputDisabledBackground};
     color : ${({theme}) => theme.text};
     padding: 20px 10px;
     font-size:16px;
@@ -37,6 +38,7 @@ const Input = forwardRef(
             isPassword,
             returnKeyType,
             maxLength,
+            disabled,
         },
         ref
     ) => {
@@ -64,6 +66,7 @@ const Input = forwardRef(
                 autoCorrect={false}
                 textContentType="none"//iOS onlu
                 underlineColorAndroid="transparent" //Android only
+                editable = {!disabled}
             />
         </Container>
         );
@@ -72,18 +75,21 @@ const Input = forwardRef(
 
 Input.defaultProps = {
     onBlur: ()=> {},
+    onChangeText: () => {},
+    onSubmitEditing : () => {},
 };
 
 Input.propTypes = {
     label : PropTypes.string.isRequired,
     value : PropTypes.string.isRequired,
-    onChangeText : PropTypes.func.isRequired,
-    onsubmitEditing : PropTypes.func.isRequired,
+    onChangeText : PropTypes.func,
+    onsubmitEditing : PropTypes.func,
     onBlur : PropTypes.func,
     placeholder : PropTypes.string,
     isPassword : PropTypes.string,
     returnKeyType : PropTypes.oneOf(['done', 'next']),
     maxLength : PropTypes.number,
+    disabled : PropTypes.bool,
 };
 
 export default Input;
