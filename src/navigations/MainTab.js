@@ -46,7 +46,7 @@ const MainTab = ({ navigation, route}) => {
                 }}
             />
             <Tab.Screen 
-                name="Profile" 
+                name="User Profile" 
                 component={Profile}  
                 options={{
                     headerShown:false,
