@@ -23,7 +23,18 @@ const MainTab = ({ navigation, route}) => {
     useEffect(() => {
         const titles = route.state?.routeNames || ['Channels'];
         const index = route.state?.index || 0;
-        navigation.setOptions({ headerTitle: titles[index] });
+        navigation.setOptions({ 
+            headerTitle: titles[index], 
+            headerRight : () => 
+                index === 0 && (
+                    <MaterialIcons
+                        name="add"
+                        size={26}
+                        style={{ margin : 10 }}
+                        opPress={() => navigation.navigator('Channel Creation')}
+                        />
+                ),
+        });
     }, [route]);
 
     return (
