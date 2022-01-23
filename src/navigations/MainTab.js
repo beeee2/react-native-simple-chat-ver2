@@ -31,7 +31,7 @@ const MainTab = ({ navigation, route}) => {
                         name="add"
                         size={26}
                         style={{ margin : 10 }}
-                        opPress={() => navigation.navigator('Channel Creation')}
+                        opPress={() => navigation.navigate('Channel Creation')}
                         />
                 ),
         });

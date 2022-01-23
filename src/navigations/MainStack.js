@@ -20,7 +20,7 @@ const MainStack = () => {
             }}
         >
             <Stack.Screen name="Main" component={MainTab} />
-            <Stack.Screen name="channel Creation" component={ChannelCreation} />
+            <Stack.Screen name="Channel Creation" component={ChannelCreation} />
             <Stack.Screen name="Channel" component={Channel} />
         </Stack.Navigator>
     );
