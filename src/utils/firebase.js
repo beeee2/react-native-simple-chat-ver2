@@ -1,8 +1,10 @@
-import firebase from 'firebase/compat/app';
+import * as firebase from 'firebase';
+// import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 import config from '../../firebase.json';
+import 'firebase/firestore';
 
 
 const app = firebase.initializeApp(config);
@@ -65,3 +67,18 @@ export const updateUserPhoto = async photoUrl => {
     await user.updateProfile({photoURL : storageUrl});
     return { name : user.displayName, email : user.email, photoUrl: user.photoURL};
 };
+
+export const DB = firebase.firestore();
+
+export const createChannel = async ({ title, description }) => {
+    const newChannelRef = DB.collection('channels').doc();
+    const id = newChannelRef.id;
+    const newChannel = {
+        id,
+        title,
+        description,
+        createdAt : Date.now(),
+    };
+    await newChannelRef.set(newChannel);
+    return id;
+}
