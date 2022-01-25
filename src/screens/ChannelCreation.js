@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect, useContext} from 'react';
 import styled from 'styled-components/native';
 import { Input, Button } from '../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import { ProgressContext } from '../contexts';
 import { createChannel } from '../utils/firebase';
 
@@ -22,7 +22,7 @@ const ErrorText = styled.Text`
     color:${({theme}) => theme.errorText};
 `;
 
-const ChannelCreation = ({navigation}) => {
+const ChannelCreation = ({ navigation }) => {
     const { spinner } = useContext(ProgressContext);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -43,7 +43,7 @@ const ChannelCreation = ({navigation}) => {
         try {
             spinner.start();
             const id = await createChannel({title, description});
-            navigation.replace('Channel', {id, title});
+            navigation.replace('Channel', { id, title });
         } catch (e) {
             Alert.alert('Creation Error', e.message);
         } finally {
