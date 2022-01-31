@@ -29,7 +29,7 @@ const ItemDescription = styled.Text`
     color : ${({theme}) => theme.listTime};
 `;
 const ItemTime = styled.Text`
-    font-size: 14px;
+    font-size: 15px;
     color: ${({theme}) => theme.listTime};
 `;
 
